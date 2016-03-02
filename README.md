@@ -1,35 +1,59 @@
-How the script run_analysis.R works
+#How the script run_analysis.R works. 
+#####################################
 There is the following process that this scrip does:
-a) Read files of data:
-	a.1)activity_labels.txt
-	a.2)features.txt
-	a.3)Train files
-		X_train.txt
-		Y_train.txt
-		subject_train.txt
-	a.4)Test files
-		X_test.txt
-		Y_test.txt
-		subject_test.txt
+####################################################
+#Library to use: library(dplyr)
 
-b)Merge all data (train and test) of the subject with the activity description(activity_labels)
+### Read files
+#########################
 
-c)Filter only columns of the data that are "mean()" and "std()"
+#Activity : activity_labels.txt
 
-d)Filter data only with columns that was found in c)
+#Features : features.txt
 
-e)Clean "-" of the data
+# Train files :
+	UCI HAR Dataset\train\X_train.txt
+	UCI HAR Dataset\train\Y_train.txt
+	UCI HAR Dataset\train\subject_train.txt
 
-f) Union the data with the descriptions
+# Test files
+	UCI HAR Dataset\test\X_test.txt
+	UCI HAR Dataset\test\Y_test.txt
+	UCI HAR Dataset\test\subject_test.txt
 
-g)Change names of variable Activity
 
-h)Create data frame of text "Train" and "Test"
+### 2.- Extracts only the measurements on the mean and standard deviation for each measurement.
+##############################################################################################
+# Filter only columns name with "mean()" and "std()" using grep
 
-i)Union data in order to indicate "Train" or "Test"
 
-j)Combine data of train and test
+### 3.- Uses descriptive activity names to name the activities in the data set
+#################################################################################
+# Merge ytrain with activity desc and ytest with activity "desc"
 
-k) Generate mean by subject and activity
+# Filter data only with column "mean()" and "std()" using "select"
 
-l) write final data to disk
+# Replace "-" with "" in the names of variable using "gsub"
+
+# Union subjtest,ytestdesc,xtestesub and subjtrain,ytraindesc,xtrainsub
+
+
+### 4.- Appropriately labels the data set with descriptive variable names.
+#############################################################################
+# Change names to "Subject", "Activity", "desc.activity"
+
+#Create data frame of text "Train" and "Test" and change the names to "Type Data"
+
+#Union data in order to indicate "Train" or "Test"
+
+
+### 1.- Merges the training and the test sets to create one data set.
+#######################################################################
+# Combine data of train and test
+
+
+### 5.- From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+#####################################################################################################################################################################
+# Generate mean by subject and activity of the data 
+
+# write final data to disk using row.name = FALSE
